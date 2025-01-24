@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
@@ -24,33 +25,23 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 
+
+    Route::resource('/dashboard',\App\Http\Controllers\DashboardController::class);
     Route::resource('/pendataan', \App\Http\Controllers\DocumentController::class);
     Route::resource('/category', \App\Http\Controllers\CategoryController::class);
-    Route::resource('/status', \App\Http\Controllers\StatusController::class);
+    Route::resource('/label', \App\Http\Controllers\LabelController::class);
+    Route::resource('/aktif', \App\Http\Controllers\ArsipAktifController::class);
+    Route::resource('/inaktif', \App\Http\Controllers\ArsipInaktifController::class);
+    Route::resource('/vital', \App\Http\Controllers\ArsipVitalController::class);
+    Route::resource('/statis', \App\Http\Controllers\ArsipStatisController::class);
+    Route::resource('/peminjaman', \App\Http\Controllers\BorrowController::class);
+    Route::post('/peminjaman/return/{id}', [BorrowController::class, 'return'])->name('peminjaman.return');
+    Route::get('/riwayat', [BorrowController::class, 'recent'])->name('peminjaman.recent');
 
-    Route::get('/11', function () {
-        return view('arsip.aktif');
-    })->name('11');
 
-    Route::get('/12', function () {
-        return view('arsip.inaktif');
-    })->name('12');
 
-    Route::get('/13', function () {
-        return view('arsip.vital');
-    })->name('13');
 
-    Route::get('/14', function () {
-        return view('arsip.statis');
-    })->name('14');
-
-    Route::get('/15', function () {
-        return view('peminjaman');
-    })->name('15');
 
 
 

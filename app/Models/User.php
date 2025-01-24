@@ -58,4 +58,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+
+    public function borrow(){
+        return $this->hasMany(Borrow::class, 'users_id', 'id');
+    }
 }

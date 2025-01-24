@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('borrowings', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('archive_number');
-            $table->longText('description');
-            $table->string('directory');
-            $table->bigInteger('labels_id');
-            $table->bigInteger('categories_id');
+            $table->string('name');
+            $table->bigInteger('users_id');
+            $table->bigInteger('documents_id');
+            $table->dateTime('borrow_date');
+            $table->dateTime('return_date');
+            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('borrowings');
     }
 };

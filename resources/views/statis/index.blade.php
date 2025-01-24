@@ -1,17 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Category') }}
+            {{ __('Arsip') }}
         </h2>
     </x-slot>
 
     <x-slot name="script">
         <script>
+
             $(document).ready(function () {
                 $('#crudTable').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('category.index') }}",
+                    ajax: "{{ route('statis.index') }}",
+
                     columns: [
                         {
                           data: null, // Kolom untuk nomor
@@ -22,7 +24,17 @@
                                 orderable: false,
                                 searchable: false
                                                     },
-                        { data: 'name', name: 'name' },
+
+                        { data: 'title', name: 'title' },
+                        { data: 'archive_number', name: 'archive_number' },
+                        { data: 'category.name', name: 'category.name' },
+
+                        {
+                          data: 'created_at', // Kolom `created_at`
+                            render: function (data) {
+                            return moment(data).format('DD-MM-YYYY'); // Format: 19-01-2025 15:30:45
+                            }
+                                                    },
                         { data: 'action', name: 'action', orderable: false, searchable: false },
                     ],
                 });
@@ -35,11 +47,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-10">
-                <a href="{{ route('category.create') }}" class= " bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
-                    + Tambah Kategori
-                </a>
-            </div>
+
             <div class="shadow overflow-hidden sm:rounded-md">
                 <div class="px-4 py-5 bg-white sm:p-6">
 
@@ -49,7 +57,10 @@
                                 <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
+                                    <th>Judul</th>
+                                    <th>Nomor</th>
+                                    <th>Kategori</th>
+                                    <th>Tanggal</th>
                                     <th>Aksi</th>
                                 </tr>
                                 </thead>

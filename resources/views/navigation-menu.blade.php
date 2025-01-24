@@ -5,14 +5,14 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('dashboard.index') }}">
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
@@ -22,34 +22,39 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('11') }}" :active="request()->routeIs('11')">
+                    <x-nav-link href="{{ route('aktif.index') }}" :active="request()->routeIs('aktif.index')">
                         {{ __('Arsip Aktif') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('12') }}" :active="request()->routeIs('12')">
+                    <x-nav-link href="{{ route('inaktif.index') }}" :active="request()->routeIs('inaktif.index')">
                         {{ __('Arsip Inaktif') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('13') }}" :active="request()->routeIs('13')">
+                    <x-nav-link href="{{ route('vital.index') }}" :active="request()->routeIs('vital.index')">
                         {{ __('Arsip Vital') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('14') }}" :active="request()->routeIs('14')">
+                    <x-nav-link href="{{ route('statis.index') }}" :active="request()->routeIs('statis.index')">
                         {{ __('Arsip Statis') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('15') }}" :active="request()->routeIs('15')">
+                    <x-nav-link href="{{ route('peminjaman.index') }}" :active="request()->routeIs('peminjaman.index')">
                         {{ __('Peminjaman') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.index')">
-                        {{ __('Category') }}
+                        {{ __('Kategori') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('label.index') }}" :active="request()->routeIs('label.index')">
+                        {{ __('Label') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -177,7 +182,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>

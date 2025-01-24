@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Label extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
      /**
      * The attributes that should be hidden for arrays.
@@ -18,7 +17,7 @@ class Category extends Model
     protected $fillable = ['name'];
 
 
-    public function document(){
-        return $this->hasMany(Document::class, 'categories_id', 'id');
+    public function labels(){
+        return $this->hasMany(Document::class, 'labels_id', 'id');
     }
 }

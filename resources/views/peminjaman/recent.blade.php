@@ -1,17 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Category') }}
+            {{ __('Riwayat Peminjaman') }}
         </h2>
     </x-slot>
 
     <x-slot name="script">
         <script>
+
             $(document).ready(function () {
                 $('#crudTable').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('category.index') }}",
+                    ajax: "{{ route('peminjaman.recent') }}",
+
                     columns: [
                         {
                           data: null, // Kolom untuk nomor
@@ -22,8 +24,25 @@
                                 orderable: false,
                                 searchable: false
                                                     },
+
                         { data: 'name', name: 'name' },
-                        { data: 'action', name: 'action', orderable: false, searchable: false },
+                        { data: 'document.title', name: 'document.title' },
+
+                        { data: 'status', name: 'status' },
+                        {
+                          data: 'borrow_date', // Kolom `created_at`
+                            render: function (data) {
+                            return moment(data).format('DD-MM-YYYY'); // Format: 19-01-2025 15:30:45
+                            }
+                                                    },
+                                                    {
+                          data: 'return_date', // Kolom `created_at`
+                            render: function (data) {
+                            return moment(data).format('DD-MM-YYYY'); // Format: 19-01-2025 15:30:45
+                            }
+                                                    },
+                        { data: 'user.name', name: 'user.name' },
+
                     ],
                 });
             });
@@ -35,11 +54,17 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-10">
-                <a href="{{ route('category.create') }}" class= " bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
-                    + Tambah Kategori
-                </a>
+
+            <div class="flex flex-wrap -mx-3 mb-10">
+                <div class="w-full px-3 ">
+                    <a href="{{ route('peminjaman.index') }}"  class= " bg-gray-700 text-white font-bold py-2 px-4 rounded shadow-lg">
+                        Kembali
+                    </a>
+
+                </div>
             </div>
+
+
             <div class="shadow overflow-hidden sm:rounded-md">
                 <div class="px-4 py-5 bg-white sm:p-6">
 
@@ -50,7 +75,12 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Aksi</th>
+                                    <th>Arsip</th>
+                                    <th>Status</th>
+                                    <th>Tanggal Pinjam</th>
+                                    <th>Tanggal Kembali</th>
+                                    <th>Petugas</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>

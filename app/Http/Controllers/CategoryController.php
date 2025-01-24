@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseFormatter;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
+
 use Yajra\DataTables\DataTables;
 
 class CategoryController extends Controller
@@ -18,13 +20,22 @@ class CategoryController extends Controller
             return DataTables::of($data)
 
                 ->addIndexColumn()
-                ->addColumn('action', function ($item) {
-                    $btn = '<a href="' . route('category.edit', $item->id) . '" class="border border-red-500 bg-gray-500 text-white rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-gray-600 focus:outline-none focus:shadow-outline">Edit</a>';
-                    $btn .= ' <a href="' . route('category.destroy', $item->id) . '" class="border border-red-500 bg-red-500 text-white rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline" >
+                ->addColumn('action', function ($data) {
+                    $btn = ' <form class="inline-block" action="' . route('category.edit', $data->id) . '" method="GET">
+                    <button  class="border border-gray-500 bg-white-500 text-black rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-green-500 focus:outline-none focus:shadow-outline" >
+                           Edit
+                       </button>
+
+                   </form>';
+                    $btn .= ' <form class="inline-block" action="' . route('category.destroy', $data->id) . '" method="POST">
+                     <button  class="border border-gray-500 bg-white-500 text-black rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-red-500 focus:outline-none focus:shadow-outline" >
                             Hapus
-                        </a>';
+                        </button>
+                         ' . method_field('delete') . csrf_field() . '
+                    </form>';
                     return $btn;
                 })
+
                 ->rawColumns(['action'])
                 ->make(true);
         } //get posts
@@ -39,15 +50,19 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $data = $request->all();
+
+        Category::create($data);
+
+        return redirect()->route('category.index');
     }
 
     /**
@@ -61,24 +76,33 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        return view('category.edit',[
+            'data' => $category
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryRequest $request, Category  $category)
     {
-        //
+        $data = $request->all();
+
+        $category->update($data);
+
+        return redirect()->route('category.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('category.index');
     }
+
 }

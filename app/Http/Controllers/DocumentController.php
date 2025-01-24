@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DocumentRequest;
+use App\Models\Category;
 use App\Models\Document;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\Models\Label;
+
 
 class DocumentController extends Controller
 {
@@ -13,9 +15,10 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        // $data = Document::all();
+        $labels = Label::all();
+        $categories = Category::all();
 
-        return view('pendataan');
+        return view('pendataan.index', compact('labels','categories'));
     }
 
     /**
@@ -23,32 +26,30 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('pendataan');
+      //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DocumentRequest $request)
     {
-         //validate form
-         $this->validate($request, [
-            'title'     => 'required',
-            'statuses_id'     => 'required',
-            'categories_id'     => 'required',
-            'description'   => 'required',
-            'directory'   => 'required'
-        ]);
+        $data = $request->all();
+        $labels = Label::all();
+        $categories = Category::all();
 
-        return redirect()->route('pendataan')->with(['success' => 'Data Berhasil Disimpan!']);
+        Document::create($data);
+
+        return view('pendataan.index', compact('labels','categories'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $data = Document::findOrFail($id); // Ambil data berdasarkan ID
+        return view('arsip.detail', compact('data'));
     }
 
     /**
@@ -62,16 +63,31 @@ class DocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(DocumentRequest $request, $id)
     {
-        //
-    }
+        $document= Document::findOrFail($id);
 
+        $document->update([
+        'title' => $request->title,
+        'labels_id' => $request->labels_id,
+        'categories_id' => $request->categories_id,
+        'description' => $request->description,
+        'directory' => $request->directory,
+
+    ]);
+
+        return redirect()->route('dashboard');
+
+    }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $document = Document::find($id);
+
+        $document->delete();
+
+        return redirect()->route('dashboard');
     }
 }

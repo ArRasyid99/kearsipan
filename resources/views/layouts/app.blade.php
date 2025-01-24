@@ -12,7 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-
+        
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
         <link rel="stylesheet" href="resources/css/app.css">
@@ -85,9 +85,10 @@
          {{-- <script src="{{ mix('js/app.js') }}" defer></script> --}}
          <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
          <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
          <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-
+         @bukStyles(true)
     </head>
     <body class="font-sans antialiased">
         <x-banner />
@@ -114,5 +115,6 @@
 
         @livewireScripts
         {{ $script ?? '' }}
+        @bukScripts(true)
     </body>
 </html>

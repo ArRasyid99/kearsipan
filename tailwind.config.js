@@ -19,8 +19,22 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            typography: {
+                DEFAULT: {
+                    css: {
+                        h1: {
+                            fontSize: '2.25rem', // Sama dengan text-4xl
+                            fontWeight: '700',   // Sama dengan font-bold
+                            color: '#1F2937',    // Sama dengan text-gray-800
+                        },
+                    },
+                },
+            },
         },
+
+
     },
 
-    plugins: [forms, typography],
+    plugins: [forms, typography, require('@tailwindcss/typography'),],
+
 };
