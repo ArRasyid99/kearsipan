@@ -31,6 +31,7 @@ Route::middleware([
     Route::resource('/pendataan', \App\Http\Controllers\DocumentController::class);
     Route::resource('/category', \App\Http\Controllers\CategoryController::class);
     Route::resource('/label', \App\Http\Controllers\LabelController::class);
+    Route::resource('/dinamis', \App\Http\Controllers\ArsipDinamisController::class);
     Route::resource('/aktif', \App\Http\Controllers\ArsipAktifController::class);
     Route::resource('/inaktif', \App\Http\Controllers\ArsipInaktifController::class);
     Route::resource('/vital', \App\Http\Controllers\ArsipVitalController::class);

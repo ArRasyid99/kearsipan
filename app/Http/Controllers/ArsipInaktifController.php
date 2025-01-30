@@ -14,7 +14,7 @@ class ArsipInaktifController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $data = Document::with('category','label')->where('labels_id',2)->get();
+            $data = Document::with('category','label')->where('labels_id',3)->get();
             return DataTables::of($data)
 
                 ->addIndexColumn()

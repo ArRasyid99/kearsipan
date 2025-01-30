@@ -22,6 +22,11 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('dinamis.index') }}" :active="request()->routeIs('dinamis.index')">
+                        {{ __('Arsip Dinamis') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('aktif.index') }}" :active="request()->routeIs('aktif.index')">
                         {{ __('Arsip Aktif') }}
                     </x-nav-link>
@@ -32,31 +37,23 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('vital.index') }}" :active="request()->routeIs('vital.index')">
-                        {{ __('Arsip Vital') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('statis.index') }}" :active="request()->routeIs('statis.index')">
                         {{ __('Arsip Statis') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('vital.index') }}" :active="request()->routeIs('vital.index')">
+                        {{ __('Arsip Vital') }}
+                    </x-nav-link>
+                </div>
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('peminjaman.index') }}" :active="request()->routeIs('peminjaman.index')">
                         {{ __('Peminjaman') }}
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.index')">
-                        {{ __('Kategori') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('label.index') }}" :active="request()->routeIs('label.index')">
-                        {{ __('Label') }}
-                    </x-nav-link>
-                </div>
+
             </div>
 
 
@@ -143,6 +140,15 @@
 
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('dashboard.create') }}">
+                                {{ __('Tamban Admin') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link href="{{  route('category.index') }}">
+                                {{ __('Kategori') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link href="{{  route('label.index') }}">
+                                {{ __('Label') }}
                             </x-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

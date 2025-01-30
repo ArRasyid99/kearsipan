@@ -45,16 +45,4 @@ class Document extends Model
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 }

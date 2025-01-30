@@ -60,8 +60,7 @@ class User extends Authenticatable
     ];
 
 
-
     public function borrow(){
-        return $this->hasMany(Borrow::class, 'users_id', 'id');
+        return $this->hasMany(Borrowing::class, 'users_id', 'id');
     }
 }

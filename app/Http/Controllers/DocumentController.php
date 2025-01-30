@@ -48,8 +48,7 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        $data = Document::findOrFail($id); // Ambil data berdasarkan ID
-        return view('arsip.detail', compact('data'));
+
     }
 
     /**

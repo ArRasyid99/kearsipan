@@ -6,32 +6,31 @@ use App\Http\Requests\DocumentRequest;
 use App\Models\Category;
 use App\Models\Document;
 use App\Models\Label;
-
 use Yajra\DataTables\DataTables;
 
-class ArsipVitalController extends Controller
+class ArsipDinamisController extends Controller
 {
     public function index()
     {
         if (request()->ajax()) {
-            $data = Document::with('category','label')->where('labels_id',5)->get();
+            $data = Document::with('category','label')->where('labels_id',1)->get();
             return DataTables::of($data)
 
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $btn = ' <form class="inline-block" action="' . route('vital.show', $data->id) . '" method="GET">
+                    $btn = ' <form class="inline-block" action="' . route('dinamis.show', $data->id) . '" method="GET">
                     <button  class="border border-gray-500 bg-white-500 text-black rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-green-500 focus:outline-none focus:shadow-outline" >
                            Lihat
                        </button>
 
                    </form>';
-                    $btn .= ' <form class="inline-block" action="' . route('vital.edit', $data->id) . '" method="GET">
+                    $btn .= ' <form class="inline-block" action="' . route('dinamis.edit', $data->id) . '" method="GET">
                     <button  class="border border-gray-500 bg-white-500 text-black rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-green-500 focus:outline-none focus:shadow-outline" >
                            Edit
                        </button>
 
                    </form>';
-                    $btn .= ' <form class="inline-block" action="' . route('vital.destroy', $data->id) . '" method="POST">
+                    $btn .= ' <form class="inline-block" action="' . route('dinamis.destroy', $data->id) . '" method="POST">
                      <button  class="border border-gray-500 bg-white-500 text-black rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-red-500 focus:outline-none focus:shadow-outline" >
                             Hapus
                         </button>
@@ -46,10 +45,10 @@ class ArsipVitalController extends Controller
 
 
          //render view with posts
-         return view('vital.index');
+         return view('dinamis.index');
     }
 
-      /**
+     /**
      * Display the specified resource.
      */
     public function show($id)
@@ -80,6 +79,7 @@ class ArsipVitalController extends Controller
 
         $document->delete();
 
-        return redirect()->route('vital.index');
+        return redirect()->route('dinamis.index');
     }
+
 }
